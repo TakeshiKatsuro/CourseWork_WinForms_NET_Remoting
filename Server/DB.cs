@@ -5,12 +5,11 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Data.SQLite;
 
-namespace CourseWork_TP_2023
-{
-    
-    class DB
+namespace Server
+{    
+    public class DB
     {
-        const string conString = "Data Source=C:/Users/Руслан/source/repos/CourseWork_TP_2023/DB_CourseWork.db";
+        const string conString = "Data Source=C:/Users/Руслан/source/repos/CourseWork_TP_WinForms/Server/DB_CourseWork.db";
         SQLiteConnection connection = new SQLiteConnection(conString);
 
         public void openConnection()

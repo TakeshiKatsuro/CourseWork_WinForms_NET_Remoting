@@ -1,30 +1,30 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
 using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Data.SQLite;
+using Server;
+using System.Runtime.Remoting.Lifetime;
+using System.Runtime.Remoting;
 
 namespace CourseWork_TP_2023
 {
+
     public partial class RegistryForm : Form
     {
+        public RemoteObjectTCP remoteTCP;
         public RegistryForm()
         {
             InitializeComponent();
+            RemotingConfiguration.Configure("C:\\Users\\Руслан\\source\\repos\\CourseWork_TP_WinForms\\ClientConfig.config", false);
+            remoteTCP = new RemoteObjectTCP();
+            ILease lease = (ILease)remoteTCP.InitializeLifetimeService();
+            ClientSponsor clientTCPSponsor = new ClientSponsor();
+            lease.Register(clientTCPSponsor);
         }
 
         private void buttonRegister_Click(object sender, EventArgs e)
         {
-            string login = userNameField.Text;
-            string password = passField.Text;
-            string confirm = confirmField.Text;
-            string name = name1st.Text;
-            string familia = name2nd.Text;
+            bool check = remoteTCP.isUserExists(userNameField.Text);
 
             if(userNameField.Text == "Логин")
             {
@@ -62,66 +62,25 @@ namespace CourseWork_TP_2023
                 return;
             }
 
-            if (isUserExists())
-                return;
-
-            DB db = new DB();
-            SQLiteCommand command = new SQLiteCommand("INSERT INTO users (login, password, first_name, last_name) " +
-                "VALUES (@login, @pass, @1st_name, @2nd_name)", db.getConnection());
-            command.Parameters.AddWithValue("@login", login);
-            command.Parameters.AddWithValue("@1st_name", name);
-            command.Parameters.AddWithValue("@2nd_name", familia); 
-            command.Parameters.AddWithValue("@pass", password);
-
-            db.openConnection();
-
-            if (command.ExecuteNonQuery() == 1)
-                MessageBox.Show("Аккаунт был создан");
-            else
-                MessageBox.Show("Ошибка! Не удалось создать аккаунт");
-
-            db.closeConnection();
-        }
-
-        public Boolean isUserExists()
-        {
-            using (SQLiteConnection conn = new SQLiteConnection("Data Source=C:/Users/Руслан/source/repos/CourseWork_TP_WinForms/DB_CourseWork.db;"))
+            if (check == true)
             {
-                conn.Open();
-
-                string sql = "SELECT * FROM users WHERE login=@username";
-                using (SQLiteCommand cmd = new SQLiteCommand(sql, conn))
+                MessageBox.Show("Пользователь с таким логином уже существует");
+            }
+            else
+            {
+                int response = remoteTCP.Registration(userNameField.Text, name1st.Text, name2nd.Text, passField.Text);
+                if (response == 1)
                 {
-                    cmd.Parameters.AddWithValue("@username", userNameField.Text);
-
-                    using (SQLiteDataReader dataReader = cmd.ExecuteReader())
-                    {
-                        if (dataReader.HasRows)
-                        {
-                            MessageBox.Show("Пользователь с таким логином уже существует");
-                            return true;
-                        }
-                        else                   
-                            return false;                        
-                    }
+                    MessageBox.Show("Аккаунт был создан");
                 }
-                conn.Close();
+                else
+                    MessageBox.Show("Ошибка! Не удалось создать аккаунт");
             }
         }
 
         private void closeButton_Click(object sender, EventArgs e)
         {
             this.Close();
-        }
-
-        private void closeButton_MouseEnter(object sender, EventArgs e)
-        {
-            closeButton.ForeColor = Color.Red;
-        }
-
-        private void closeButton_MouseLeave(object sender, EventArgs e)
-        {
-            closeButton.ForeColor = Color.White;
         }
 
         private void userNameField_Enter(object sender, EventArgs e)
@@ -221,7 +180,7 @@ namespace CourseWork_TP_2023
             loginForm.Show();
         }
 
-        bool password_show = false;
+        bool password_show = true;
         private void hide_btn_Click(object sender, EventArgs e)
         {
             password_show = !password_show;

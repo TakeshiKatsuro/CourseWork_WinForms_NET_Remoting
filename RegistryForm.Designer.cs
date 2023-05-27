@@ -75,7 +75,7 @@ namespace CourseWork_TP_2023
             // hide_btn
             // 
             this.hide_btn.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
-            this.hide_btn.BackgroundImage = global::CourseWork_TP_2023.Properties.Resources.visible;
+            this.hide_btn.BackgroundImage = global::CourseWork_TP_2023.Properties.Resources.non_visible;
             this.hide_btn.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
             this.hide_btn.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.hide_btn.Cursor = System.Windows.Forms.Cursors.Hand;
@@ -113,11 +113,12 @@ namespace CourseWork_TP_2023
             this.name2nd.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
             this.name2nd.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.name2nd.Font = new System.Drawing.Font("Bahnschrift Condensed", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.name2nd.ForeColor = System.Drawing.Color.White;
+            this.name2nd.ForeColor = System.Drawing.Color.Gray;
             this.name2nd.Location = new System.Drawing.Point(105, 267);
             this.name2nd.Name = "name2nd";
             this.name2nd.Size = new System.Drawing.Size(217, 35);
             this.name2nd.TabIndex = 4;
+            this.name2nd.Text = "Введите фамилию";
             this.name2nd.Enter += new System.EventHandler(this.name2nd_Enter);
             this.name2nd.Leave += new System.EventHandler(this.name2nd_Leave);
             // 
@@ -126,12 +127,12 @@ namespace CourseWork_TP_2023
             this.passField.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
             this.passField.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.passField.Font = new System.Drawing.Font("Bahnschrift Condensed", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.passField.ForeColor = System.Drawing.Color.White;
+            this.passField.ForeColor = System.Drawing.Color.Gray;
             this.passField.Location = new System.Drawing.Point(105, 344);
             this.passField.Name = "passField";
             this.passField.Size = new System.Drawing.Size(178, 35);
             this.passField.TabIndex = 5;
-            this.passField.UseSystemPasswordChar = true;
+            this.passField.Text = "Придумайте пароль";
             this.passField.Enter += new System.EventHandler(this.passField_Enter);
             this.passField.Leave += new System.EventHandler(this.passField_Leave);
             // 
@@ -140,11 +141,12 @@ namespace CourseWork_TP_2023
             this.name1st.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
             this.name1st.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.name1st.Font = new System.Drawing.Font("Bahnschrift Condensed", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.name1st.ForeColor = System.Drawing.Color.White;
+            this.name1st.ForeColor = System.Drawing.Color.Gray;
             this.name1st.Location = new System.Drawing.Point(105, 194);
             this.name1st.Name = "name1st";
             this.name1st.Size = new System.Drawing.Size(217, 35);
             this.name1st.TabIndex = 3;
+            this.name1st.Text = "Введите имя";
             this.name1st.Enter += new System.EventHandler(this.name1st_Enter);
             this.name1st.Leave += new System.EventHandler(this.name1st_Leave);
             // 
@@ -169,12 +171,12 @@ namespace CourseWork_TP_2023
             this.confirmField.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
             this.confirmField.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.confirmField.Font = new System.Drawing.Font("Bahnschrift Condensed", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.confirmField.ForeColor = System.Drawing.Color.White;
+            this.confirmField.ForeColor = System.Drawing.Color.Gray;
             this.confirmField.Location = new System.Drawing.Point(105, 413);
             this.confirmField.Name = "confirmField";
             this.confirmField.Size = new System.Drawing.Size(217, 35);
             this.confirmField.TabIndex = 6;
-            this.confirmField.UseSystemPasswordChar = true;
+            this.confirmField.Text = "Подтвердите пароль";
             this.confirmField.Enter += new System.EventHandler(this.confirmField_Enter);
             this.confirmField.Leave += new System.EventHandler(this.confirmField_Leave);
             // 
@@ -193,11 +195,12 @@ namespace CourseWork_TP_2023
             this.userNameField.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
             this.userNameField.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.userNameField.Font = new System.Drawing.Font("Bahnschrift Condensed", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.userNameField.ForeColor = System.Drawing.Color.White;
+            this.userNameField.ForeColor = System.Drawing.Color.Gray;
             this.userNameField.Location = new System.Drawing.Point(105, 126);
             this.userNameField.Name = "userNameField";
             this.userNameField.Size = new System.Drawing.Size(217, 35);
             this.userNameField.TabIndex = 2;
+            this.userNameField.Text = "Логин";
             this.userNameField.Enter += new System.EventHandler(this.userNameField_Enter);
             this.userNameField.Leave += new System.EventHandler(this.userNameField_Leave);
             // 

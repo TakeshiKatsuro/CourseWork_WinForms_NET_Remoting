@@ -8,17 +8,28 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Data.SQLite;
+using System.Runtime.Remoting.Channels;
+using System.Runtime.Remoting.Lifetime;
+using System.Runtime.Serialization.Formatters;
+using Server;
+using System.Runtime.Remoting.Channels.Http;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement;
+using System.Runtime.Remoting;
 
 namespace CourseWork_TP_2023
 {
     public partial class LoginForm : Form
     {
+        public RemoteObjectTCP remoteTCP;
+
         public LoginForm()
         {
             InitializeComponent();
-
-            /*this.passField.AutoSize = false;
-            this.passField.Size = new Size(this.passField.Size.Width, 48);*/
+            RemotingConfiguration.Configure("C:\\Users\\Руслан\\source\\repos\\CourseWork_TP_WinForms\\ClientConfig.config", false);
+            remoteTCP = new RemoteObjectTCP();
+            ILease lease = (ILease)remoteTCP.InitializeLifetimeService();
+            ClientSponsor clientTCPSponsor = new ClientSponsor();
+            lease.Register(clientTCPSponsor);
         }
 
         private void closeButton_Click(object sender, EventArgs e)
@@ -69,34 +80,17 @@ namespace CourseWork_TP_2023
 
         private void buttonLogin_Click(object sender, EventArgs e)
         {
-            string login = loginField.Text;
-            string password = passField.Text;
+            int response = remoteTCP.Autorization(loginField.Text, passField.Text);
 
-            using (SQLiteConnection conn = new SQLiteConnection("Data Source=C:/Users/Руслан/source/repos/CourseWork_TP_WinForms/DB_CourseWork.db;"))
+            if (response == 1)
             {
-                conn.Open();
-
-                string sql = "SELECT * FROM users WHERE login=@username AND password=@password";
-                using (SQLiteCommand cmd = new SQLiteCommand(sql, conn))
-                {
-                    cmd.Parameters.AddWithValue("@username", login);
-                    cmd.Parameters.AddWithValue("@password", password);
-
-                    using (SQLiteDataReader dataReader = cmd.ExecuteReader())
-                    {
-                        if (dataReader.HasRows)
-                        {
-                            this.Hide();
-                            MainForm mainForm = new MainForm();
-                            mainForm.Show();
-                        }
-                        else
-                        {
-                            MessageBox.Show("Неверный логин или пароль!");
-                        }
-                    }
-                }
-                conn.Close();
+                this.Hide();
+                MainForm mainForm = new MainForm();
+                mainForm.Show();
+            }
+            else
+            {
+                MessageBox.Show("Неверный логин или пароль!");
             }
         }
 
