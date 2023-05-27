@@ -1,9 +1,13 @@
 ﻿
+using System.Data;
+
 namespace Server
 {
     public interface IGuitars
     {
-        int find(string brand, string model);
+        DataTable findByBrand(string brand);
+        DataTable findByModel(string model);
+        DataTable fullTable();
         //Guitars find();
         //List<Guitars> findAll();
     }

@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Data;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -12,7 +13,7 @@ namespace Server
     [Serializable]
     public class RemoteObjectHTTP : MarshalByRefObject, IGuitars
     {
-        private string connectionString = "Data Source=C:/Users/Руслан/source/repos/CourseWork_TP_2023/DB_CourseWork.db";
+        private string connectionString = "Data Source=C:/Users/Руслан/source/repos/CourseWork_TP_WinForms/Server/DB_CourseWork.db";
 
         public RemoteObjectHTTP()
         {
@@ -42,9 +43,61 @@ namespace Server
             return lease;
         }
 
-        public int find(string brand, string model)
+        public DataTable fullTable()
         {
-            throw new NotImplementedException();
+            using (SQLiteConnection conn = new SQLiteConnection(connectionString))
+            {
+                // открытие соединения
+                conn.Open();
+
+                DataTable dataTable = new DataTable(); // создание таблицы
+                SQLiteDataAdapter adapter = new SQLiteDataAdapter(string.Format("SELECT * FROM Guitars"), conn);
+                adapter.Fill(dataTable); // запись результатов выполнения запроса в таблицу
+
+                // закрытие соединения
+                conn.Close();
+
+                // возвращение таблицы
+                return dataTable;
+            }
+        }
+
+        public DataTable findByBrand(string brand)
+        {
+            using (SQLiteConnection conn = new SQLiteConnection(connectionString))
+            {
+                // открытие соединения
+                conn.Open();
+
+                DataTable dataTable = new DataTable(); // создание таблицы
+                SQLiteDataAdapter adapter = new SQLiteDataAdapter(string.Format("SELECT * FROM Guitars WHERE Brand='{0}'", brand), conn);
+                adapter.Fill(dataTable); // запись результатов выполнения запроса в таблицу
+
+                // закрытие соединения
+                conn.Close();
+
+                // возвращение таблицы
+                return dataTable;
+            }
+        }
+
+        public DataTable findByModel(string model)
+        {
+            using (SQLiteConnection conn = new SQLiteConnection(connectionString))
+            {
+                // открытие соединения
+                conn.Open();
+
+                DataTable dataTable = new DataTable(); // создание таблицы
+                SQLiteDataAdapter adapter = new SQLiteDataAdapter(string.Format("SELECT * FROM Guitars WHERE Model='{0}'", model), conn);
+                adapter.Fill(dataTable); // запись результатов выполнения запроса в таблицу
+
+                // закрытие соединения
+                conn.Close();
+
+                // возвращение таблицы
+                return dataTable;
+            }
         }
     }
 }
