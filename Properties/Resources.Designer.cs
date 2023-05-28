@@ -83,6 +83,16 @@ namespace CourseWork_TP_2023.Properties {
         /// <summary>
         ///   Поиск локализованного ресурса типа System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap _4831032_door_entrance_exit_leave_logout_icon {
+            get {
+                object obj = ResourceManager.GetObject("4831032_door_entrance_exit_leave_logout_icon", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Поиск локализованного ресурса типа System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap non_visible {
             get {
                 object obj = ResourceManager.GetObject("non-visible", resourceCulture);

@@ -23,11 +23,6 @@ namespace Server
         {
             Console.WriteLine("Удаленный объект HTTP уничтожен!");
         }
-        
-        public byte[] Upload(string path)
-        {
-            return File.ReadAllBytes("Sources\\" + path);
-        }
 
         public override object InitializeLifetimeService()
         {

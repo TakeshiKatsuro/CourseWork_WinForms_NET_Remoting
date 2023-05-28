@@ -92,11 +92,6 @@ namespace Server
             }
         }
 
-        public byte[] Upload(string path)
-        {
-            return File.ReadAllBytes("Sources\\" + path);
-        }
-
         public override object InitializeLifetimeService()
         {
             ILease lease = (ILease)base.InitializeLifetimeService();
